@@ -16,12 +16,14 @@ class Application extends Container
      *
      */
     public $base_providers = [
-        \OutSource\Console\ServerProvider::class
+        \OutSource\Console\ServerProvider::class,
+        \OutSource\Config\ServerProvider::class,
     ];
 
     public function __construct(array $config = [])
     {
         parent::__construct();
+
         $this->registerConfig($config);
         $this->registerProviders();
     }
@@ -34,7 +36,6 @@ class Application extends Container
     protected function registerProviders()
     {
         foreach ($this->base_providers as $base_provider) {
-
             $this->register(new $base_provider());
         }
 
@@ -50,10 +51,7 @@ class Application extends Container
      */
     protected function registerConfig(array $config)
     {
-        $this['config'] = function() use($config){
-            return new Config($config);
-        };
-
+        $this['user_configs'] = $config;
         return $this;
     }
 

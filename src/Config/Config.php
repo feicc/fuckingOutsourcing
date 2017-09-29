@@ -16,8 +16,9 @@ class Config extends Collection
     {
         //todo 判断用户使用哪种框架驱动 默认CI
         //todo merge 用户传进来的config和CI自身config
-
-        parent::__construct($items);
+        $config = new CIConfig($items);
+        $ci_configs = $config->getConfigs();
+        parent::__construct( $ci_configs );
     }
 
 }

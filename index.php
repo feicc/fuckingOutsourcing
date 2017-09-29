@@ -6,7 +6,8 @@ use OutSource\Kernel\Application;
 
 
 $option = [
-    "base_url" => "",
+    "basePath" => dirname(__FILE__),
 ];
 
 $application = new Application($option);
+//dd($application->config->get('controller'));

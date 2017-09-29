@@ -3,7 +3,9 @@
 namespace OutSource\Config;
 
 use Pimple\Container;
+use OutSource\Config\Config;
 use Pimple\ServiceProviderInterface;
+
 
 class ServerProvider implements ServiceProviderInterface
 {
@@ -14,9 +16,14 @@ class ServerProvider implements ServiceProviderInterface
      */
     protected $container = null;
 
-    function register(Container $app)
+    public function register(Container $pimple)
     {
 
+        $pimple['config'] = function($pimple){
+            return new Config($pimple['user_configs']);
+        };
+
+        return $this;
     }
 
 
